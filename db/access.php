@@ -3,7 +3,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
 
-    'block/googlesearch:myaddinstance' => array(
+    'block/googlesearchv2:myaddinstance' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
@@ -13,7 +13,7 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/my:addinstance',
     ),
 
-    'block/googlesearch:addinstance' => array(
+    'block/googlesearchv2:addinstance' => array(
         'riskbitmask' => RISK_XSS,
 
         'captype' => 'write',

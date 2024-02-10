@@ -1,7 +1,7 @@
 <?php
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'block_googlesearch';
+$plugin->component = 'block_googlesearchv2';
 $plugin->version   = 2024021001;
 $plugin->requires  = 2019111800;
 $plugin->maturity  = MATURITY_STABLE;
