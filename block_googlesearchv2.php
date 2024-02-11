@@ -39,12 +39,21 @@ class block_googlesearchv2 extends block_base {
         $searchResults = json_decode($result, true);
 
         if (!empty($searchResults['items'])) {
-            $html = '<ul class="google-search-results">';
-            foreach ($searchResults['items'] as $item) {
-                $html .= '<li><a href="' . htmlspecialchars($item['link']) . '">' . htmlspecialchars($item['title']) . '</a></li>';
-            }
-            $html .= '</ul>';
-            $this->content->text .= $html;
+                $html = '<ul class="google-search-results">';
+                foreach ($searchResults['items'] as $item) {
+                    if (strpos($item['link'], 'continue=') !== false) { 
+                        $parsedUrl = parse_url($item['link']);
+                        $queryParams = [];
+                        parse_str($parsedUrl['query'], $queryParams);
+                        if (isset($queryParams['continue'])) {
+                            $item['link'] = urldecode($queryParams['continue']);
+                        }
+                    }
+
+                    $html .= '<li><a href="' . htmlspecialchars($item['link']) . '">' . htmlspecialchars($item['title']) . '</a></li>';
+                }
+                $html .= '</ul>';
+                $this->content->text .= $html;
         } else {
             $this->content->text .= 'Keine Ergebnisse gefunden.';
         }
